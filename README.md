@@ -51,6 +51,22 @@ $ flphoto 52783721105
 $ flphoto https://www.flickr.com/photos/nypl/4058778064/
 ```
 
+### fluser
+
+You can use the `fluser` script to get information about a single user.
+
+You can pass their NSID, or a URL to their profile page on Flickr, for example:
+
+```console
+$ fluser "https://www.flickr.com/photos/12403504@N02/"
+NSID:     12403504@N02
+username: The British Library
+realname: British Library
+URL:      https://www.flickr.com/photos/britishlibrary
+```
+
+I find this particularly useful when I need to quickly look up the NSID for a user whose profile I'm looking at.
+
 ## Installation
 
 You need the following tools for `flapi`:
@@ -60,7 +76,7 @@ You need the following tools for `flapi`:
 *   [Pygments](https://pygments.org/), for syntax highlighting
 *   xmllint, for pretty-printing XML
 
-You need additional tools for `flphoto`:
+You need additional tools for `flphoto` and `fluser`:
 
 *   [flickr-url-parser](https://pypi.org/project/flickr-url-parser/), to parse Flickr URLs
 *   [jq](https://jqlang.github.io/jq/), to parse JSON

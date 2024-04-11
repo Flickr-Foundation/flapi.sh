@@ -16,19 +16,19 @@ then
   exit 1
 fi
 
-PHOTO_ID="$1"
+USER_INPUT="$1"
 
-if [[ "$PHOTO_ID" =~ ^[0-9]+$ ]]
+if [[ "$USER_INPUT" =~ ^[0-9]+$ ]]
 then
-  flapi flickr.photos.getInfo photo_id=$PHOTO_ID
+  flapi flickr.photos.getInfo photo_id=$USER_INPUT
 else
-  PARSED_ID=$(flickr_url_parser "$PHOTO_ID" | jq -r .photo_id)
+  PHOTO_ID=$(flickr_url_parser "$USER_INPUT" | jq -r .photo_id)
 
-  if [[ "$PARSED_ID" =~ ^[0-9]+$ ]]
+  if [[ "$PHOTO_ID" =~ ^[0-9]+$ ]]
   then
-    flapi flickr.photos.getInfo photo_id=$PARSED_ID
+    flapi flickr.photos.getInfo photo_id=$PHOTO_ID
   else
-    echo "I don't know how to interpret $PHOTO_ID" >&2
+    echo "I don't know how to interpret $USER_INPUT" >&2
     exit 1
   fi
 fi

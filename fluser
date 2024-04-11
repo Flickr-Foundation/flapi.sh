@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+# Look up information about a Flickr user.
+#
+# It takes a Flickr NSID or URL to a Flickr user's profile.  Examples:
+#
+#     $ fluser 108745105@N04
+#     $ fluser https://www.flickr.com/people/twm_news/
+#
+
+set -o errexit
+set -o nounset
+
+if (( $# != 1 ))
+then
+  echo "Usage: $0 <USER_NSID|USER_URL>" >&2
+  exit 1
+fi
+
+USER_INPUT="$1"
+
+get_info_for_nsid() {
+  local user_nsid="$1"
+
+  getInfo_xml=$(
+    flapi flickr.people.getInfo user_id=$user_nsid \
+     | sed -e $'s/\x1b\[[0-9;]*m//g'
+  )
+
+  username=$(echo "$getInfo_xml" | xmllint --xpath 'string(.//username)' -)
+  realname=$(echo "$getInfo_xml" | xmllint --xpath 'string(.//realname)' -)
+  path_alias=$(echo "$getInfo_xml" | xmllint --xpath 'string(.//person/@path_alias)' -)
+
+  echo "NSID:     $user_nsid"
+  echo "username: $username"
+  echo "realname: $realname"
+
+  if [[ -n "$path_alias" ]]
+  then
+    echo "URL:      https://www.flickr.com/photos/$path_alias"
+  else
+    echo "URL:      https://www.flickr.com/photos/$user_nsid"
+  fi
+}
+
+get_info_for_user_url() {
+  local path_alias="$1"
+
+  lookupUser_xml=$(flapi flickr.urls.lookupUser url="$url")
+
+  nsid=$(echo "$lookupUser_xml" \
+    | sed -e $'s/\x1b\[[0-9;]*m//g' \
+    | xmllint --xpath 'string(.//user/@id)' -)
+
+  get_info_for_nsid "$nsid"
+}
+
+# A raw Flickr NSID, e.g. 108745105@N04
+if [[ "$USER_INPUT" =~ ^[0-9]{5,11}@N[0-9]{2}$ ]]
+then
+  get_info_for_nsid "$USER_INPUT"
+  exit 0
+fi
+
+# A URL to a Flickr Commons member page, e.g. https://commons.flickr.org/members/twm_news/
+if [[ "$USER_INPUT" == "https://commons.flickr.org/members/"* ]]; then
+  path_alias=$(echo "$USER_INPUT" | tr '/' ' ' | awk '{print $4}')
+  get_info_for_user_url "https://www.flickr.com/photos/$path_alias"
+fi
+
+# A URL to a Flickr user's profile, e.g. https://www.flickr.com/people/twm_news/
+parsed_url=$(flickr_url_parser "$USER_INPUT" || echo '')
+
+if [[ -n "$parsed_url" && $(echo "$parsed_url" | jq -r .type) == 'user' ]]
+then
+  if [[ $(echo "$parsed_url" | jq -r .user_id) == 'null' ]]
+  then
+    get_info_for_user_url $(echo "$parsed_url" | jq -r .user_url)
+  else
+    get_info_for_nsid $(echo "$parsed_url" | jq -r .user_id)
+  fi
+fi
