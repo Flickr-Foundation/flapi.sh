@@ -21,10 +21,13 @@ It's **not** meant for use in a production app – there are better ways to do t
 
 ## Usage
 
+### flapi
+
 You can use the `flapi` script to call individual API methods.
+It pretty-prints the XML returned from the API, with syntax highlighting.
 
 You pass the method as one argument, and any query parameters as a second argument.
-For example
+For example:
 
 ```console
 $ flapi flickr.photos.search user_id=124495553@N05&tag=radiotechnology
@@ -35,3 +38,42 @@ Some Flickr API methods don't need any query parameters, so you just pass the me
 ```console
 $ flapi flickr.commons.getInstitutions
 ```
+
+### flphoto
+
+You can use the `flphoto` script to get information about a single photo, using the [flickr.photos.getInfo API](https://www.flickr.com/services/api/flickr.photos.getInfo.html).
+
+You pass the photo ID or a URL to the photo as a single argument.
+For example:
+
+```console
+$ flphoto 52783721105
+$ flphoto https://www.flickr.com/photos/nypl/4058778064/
+```
+
+## Installation
+
+You need the following tools for `flapi`:
+
+*   [curl](https://curl.se/), to make HTTP requests
+*   [keyring](https://github.com/jaraco/keyring), to get a Flickr API key from your system keychain
+*   [Pygments](https://pygments.org/), for syntax highlighting
+*   xmllint, for pretty-printing XML
+
+You need additional tools for `flphoto`:
+
+*   [flickr-url-parser](https://pypi.org/project/flickr-url-parser/), to parse Flickr URLs
+*   [jq](https://jqlang.github.io/jq/), to parse JSON
+
+Once you have all your tools installed, get yourself a [Flickr API key](https://www.flickr.com/services/api/) and save it in your system keychain:
+
+```console
+$ keyring set flickr_api key
+Password for 'key' in 'flickr_api': <Enter your API key here>
+```
+
+Then add this repo to your PATH, and you can run the scripts.
+
+## License
+
+MIT.

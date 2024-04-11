@@ -5,8 +5,8 @@
 # It takes one or two arguments: the API method, plus query parameters
 # (if any).  Examples:
 #
-#     $ flapi.sh flickr.photos.getInfo photo_id=52782497889
-#     $ flapi.sh flickr.commons.getInstitutions
+#     $ flapi flickr.photos.getInfo photo_id=52782497889
+#     $ flapi flickr.commons.getInstitutions
 #
 
 set -o errexit
