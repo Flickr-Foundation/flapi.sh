@@ -21,7 +21,7 @@ It's **not** meant for use in a production app – there are better ways to do t
 
 ## Usage
 
-### flapi
+### flapi - call the API
 
 You can use the `flapi` script to call individual API methods.
 It pretty-prints the XML returned from the API, with syntax highlighting.
@@ -39,7 +39,9 @@ Some Flickr API methods don't need any query parameters, so you just pass the me
 $ flapi flickr.commons.getInstitutions
 ```
 
-### flphoto
+The nice thing about `flapi` is that I can wrap it to build other small tools for digging into the API.
+
+### flphoto - get a single photo
 
 You can use the `flphoto` script to get information about a single photo, using the [flickr.photos.getInfo API](https://www.flickr.com/services/api/flickr.photos.getInfo.html).
 
@@ -51,7 +53,7 @@ $ flphoto 52783721105
 $ flphoto https://www.flickr.com/photos/nypl/4058778064/
 ```
 
-### fluser
+### fluser - look up a user
 
 You can use the `fluser` script to get information about a single user.
 
