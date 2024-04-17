@@ -36,9 +36,9 @@ get_info_for_nsid() {
 
   if [[ -n "$path_alias" ]]
   then
-    echo "URL:      https://www.flickr.com/photos/$path_alias"
+    echo "URL:      https://www.flickr.com/photos/$path_alias/"
   else
-    echo "URL:      https://www.flickr.com/photos/$user_nsid"
+    echo "URL:      https://www.flickr.com/photos/$user_nsid/"
   fi
 }
 
