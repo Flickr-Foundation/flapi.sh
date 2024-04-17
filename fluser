@@ -43,7 +43,7 @@ get_info_for_nsid() {
 }
 
 get_info_for_user_url() {
-  local path_alias="$1"
+  local url="$1"
 
   lookupUser_xml=$(flapi flickr.urls.lookupUser url="$url")
 
