@@ -31,6 +31,9 @@ jobs:
         ruff check .
         ruff format --check .
 
+    - name: Add repo to PATH
+      run: echo "$(git rev-parse --show-toplevel)" >> $GITHUB_PATH
+
     - name: Run tests
       run: py.test tests
       env:

@@ -69,18 +69,22 @@ if [[ "$USER_INPUT" == "https://commons.flickr.org/members/"* ]]; then
 fi
 
 # A URL to a Flickr user's profile, e.g. https://www.flickr.com/people/twm_news/
-parsed_url=$(flickr_url_parser "$USER_INPUT" || echo '')
+parsed_url=$(flickr_url_parser "$USER_INPUT" 2>/dev/null || echo '')
 
-if [[ -n "$parsed_url" && $(echo "$parsed_url" | jq -r .type) == 'user' ]]
+if [[ -n "$parsed_url" ]]
 then
-  if [[ $(echo "$parsed_url" | jq -r .user_id) == 'null' ]]
+  if [[ $(echo "$parsed_url" | jq -r .type) == 'user' || $(echo "$parsed_url" | jq -r .type) == 'single_photo' ]]
   then
-    get_info_for_user_url $(echo "$parsed_url" | jq -r .user_url)
-    exit 0
-  else
-    get_info_for_nsid $(echo "$parsed_url" | jq -r .user_id)
-    exit 0
+    if [[ $(echo "$parsed_url" | jq -r .user_id) == 'null' ]]
+    then
+      get_info_for_user_url $(echo "$parsed_url" | jq -r .user_url)
+      exit 0
+    else
+      get_info_for_nsid $(echo "$parsed_url" | jq -r .user_id)
+      exit 0
+    fi
   fi
 fi
 
-echo "Unrecognised URL: $url" 2>&1
+echo "Unrecognised URL: $USER_INPUT" >&2
+exit 1
