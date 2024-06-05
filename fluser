@@ -65,6 +65,7 @@ fi
 if [[ "$USER_INPUT" == "https://commons.flickr.org/members/"* ]]; then
   path_alias=$(echo "$USER_INPUT" | tr '/' ' ' | awk '{print $4}')
   get_info_for_user_url "https://www.flickr.com/photos/$path_alias"
+  exit 0
 fi
 
 # A URL to a Flickr user's profile, e.g. https://www.flickr.com/people/twm_news/
@@ -75,7 +76,11 @@ then
   if [[ $(echo "$parsed_url" | jq -r .user_id) == 'null' ]]
   then
     get_info_for_user_url $(echo "$parsed_url" | jq -r .user_url)
+    exit 0
   else
     get_info_for_nsid $(echo "$parsed_url" | jq -r .user_id)
+    exit 0
   fi
 fi
+
+echo "Unrecognised URL: $url" 2>&1
