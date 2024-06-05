@@ -9,6 +9,8 @@ from utils import get_failure_stderr, get_success_stdout
         "197130754@N07",
         "https://www.flickr.com/people/197130754@N07",
         "https://www.flickr.com/photos/flickrfoundation/",
+        "https://www.flickr.com/photos/197130754@N07/53630778857/",
+        "https://www.flickr.com/photos/flickrfoundation/53630778857/",
     ],
 )
 def test_fluser_handles_different_variants(flickr_api_key, argv):
