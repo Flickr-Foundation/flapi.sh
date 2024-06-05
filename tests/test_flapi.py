@@ -13,9 +13,13 @@ def test_no_method_is_error():
 
 
 def test_can_call_an_api():
-    proc = subprocess.Popen(["./flapi", "flickr.profile.getProfile", "user_id=197130754@N07"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    proc = subprocess.Popen(
+        ["./flapi", "flickr.profile.getProfile", "user_id=197130754@N07"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
     stdout, stderr = proc.communicate()
 
     assert proc.returncode == 0
-    assert b'Flickr Foundation' in stdout
+    assert b"Flickr Foundation" in stdout
     assert stderr == b""
