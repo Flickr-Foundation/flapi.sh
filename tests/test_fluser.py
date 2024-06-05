@@ -1,6 +1,6 @@
 import pytest
 
-from utils import get_success_stdout
+from utils import get_failure_stderr, get_success_stdout
 
 
 @pytest.mark.parametrize(
@@ -11,7 +11,7 @@ from utils import get_success_stdout
         "https://www.flickr.com/photos/flickrfoundation/",
     ],
 )
-def test_fluser_handles_different_variants(argv: str):
+def test_fluser_handles_different_variants(flickr_api_key, argv):
     stdout = get_success_stdout(["./fluser", argv])
     assert stdout == (
         b"NSID:     197130754@N07\n"
@@ -19,3 +19,20 @@ def test_fluser_handles_different_variants(argv: str):
         b"realname: Flickr Foundation\n"
         b"URL:      https://www.flickr.com/photos/flickrfoundation/\n"
     )
+
+
+def test_no_input_is_error():
+    stderr = get_failure_stderr(cmd=["./fluser"])
+    assert stderr.startswith(b"Usage: ")
+
+
+def test_too_many_input_is_error():
+    stderr = get_failure_stderr(
+        cmd=["./fluser", "https://www.flickr.com/photos/197130754@N07", "197130754@N07"]
+    )
+    assert stderr.startswith(b"Usage: ")
+
+
+def test_unrecognised_url_is_error():
+    stderr = get_failure_stderr(["./fluser", "https://example.com"])
+    assert stderr == b"Unrecognised URL: https://example.com\n"

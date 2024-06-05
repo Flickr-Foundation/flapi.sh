@@ -69,7 +69,7 @@ if [[ "$USER_INPUT" == "https://commons.flickr.org/members/"* ]]; then
 fi
 
 # A URL to a Flickr user's profile, e.g. https://www.flickr.com/people/twm_news/
-parsed_url=$(flickr_url_parser "$USER_INPUT" || echo '')
+parsed_url=$(flickr_url_parser "$USER_INPUT" 2>/dev/null || echo '')
 
 if [[ -n "$parsed_url" && $(echo "$parsed_url" | jq -r .type) == 'user' ]]
 then
@@ -83,4 +83,5 @@ then
   fi
 fi
 
-echo "Unrecognised URL: $url" 2>&1
+echo "Unrecognised URL: $USER_INPUT" >&2
+exit 1
