@@ -4,7 +4,7 @@ import subprocess
 
 
 def test_no_method_is_error():
-    proc = subprocess.Popen(["flapi"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    proc = subprocess.Popen(["./flapi"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout, stderr = proc.communicate()
 
     assert proc.returncode == 1
