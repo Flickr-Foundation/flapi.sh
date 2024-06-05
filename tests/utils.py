@@ -39,5 +39,5 @@ def get_failure_stderr(cmd: list[str]) -> bytes:
         print(f"stderr: {stderr}")
 
     assert proc.returncode != 0
-    assert stdout
+    assert stdout == b""
     return stderr
