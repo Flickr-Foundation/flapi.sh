@@ -53,7 +53,7 @@ pygments==2.18.0
     # via -r dev_requirements.in
 pytest==8.2.2
     # via -r dev_requirements.in
-ruff==0.5.0
+ruff==0.5.1
     # via -r dev_requirements.in
 secretstorage==3.3.3
     # via keyring
