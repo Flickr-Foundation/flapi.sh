@@ -38,3 +38,16 @@ jobs:
       run: py.test tests
       env:
         FLICKR_API_KEY: ${{ secrets.FLICKR_API_KEY }}
+
+      # Dependabot doesn't have access to the secrets, so this will fail --
+      # but that's probably okay.  The tests will run when we merge to main
+      # so we'll still find out quickly if they don't work, but we won't
+      # have a red X to dismiss in the GitHub UI.
+      #
+      # This is a bit fragile because it means PRs from third parties who
+      # aren't Dependabot will fail in the same way -- but that doesn't
+      # seem like it'll be a frequent occurrence, so this is good enough
+      # for now.
+      #
+      # See https://github.com/Flickr-Foundation/flapi.sh/issues/9
+      if: github.triggering_actor != 'dependabot[bot]'
