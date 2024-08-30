@@ -26,16 +26,24 @@ jobs:
     - name: Install dependencies
       run: pip install -r dev_requirements.txt
 
-    - name: Run linting
+    - name: Check formatting
       run: |
         ruff check .
         ruff format --check .
+
+    - name: Check docstrings
+      run: interrogate -vv
+
+    - name: Check types
+      run: mypy tests
 
     - name: Add repo to PATH
       run: echo "$(git rev-parse --show-toplevel)" >> $GITHUB_PATH
 
     - name: Run tests
-      run: py.test tests
+      run: |
+        python3 -c 'import keyring, os; keyring.set_password("flickr_api", "key", os.environ["FLICKR_API_KEY"])'
+        py.test tests
       env:
         FLICKR_API_KEY: ${{ secrets.FLICKR_API_KEY }}
 

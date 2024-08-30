@@ -1,5 +1,7 @@
 flickr-url-parser
+interrogate
 keyring
+mypy
 pygments
 pytest
 ruff
