@@ -4,7 +4,7 @@ anyio==4.4.0
     # via httpx
 attrs==24.2.0
     # via interrogate
-certifi==2024.6.2
+certifi==2024.8.30
     # via
     #   httpcore
     #   httpx
@@ -18,11 +18,11 @@ h11==0.14.0
     # via httpcore
 httpcore==1.0.5
     # via httpx
-httpx==0.27.0
+httpx==0.27.2
     # via flickr-url-parser
 hyperlink==21.0.0
     # via flickr-url-parser
-idna==3.7
+idna==3.8
     # via
     #   anyio
     #   httpx
@@ -33,13 +33,13 @@ interrogate==1.7.0
     # via -r dev_requirements.in
 jaraco-classes==3.4.0
     # via keyring
-jaraco-context==5.3.0
+jaraco-context==6.0.1
     # via keyring
-jaraco-functools==4.0.1
+jaraco-functools==4.0.2
     # via keyring
 keyring==25.3.0
     # via -r dev_requirements.in
-more-itertools==10.2.0
+more-itertools==10.4.0
     # via
     #   jaraco-classes
     #   jaraco-functools
@@ -47,7 +47,7 @@ mypy==1.11.2
     # via -r dev_requirements.in
 mypy-extensions==1.0.0
     # via mypy
-packaging==24.0
+packaging==24.1
     # via pytest
 pluggy==1.5.0
     # via pytest
