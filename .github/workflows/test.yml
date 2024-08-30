@@ -26,10 +26,16 @@ jobs:
     - name: Install dependencies
       run: pip install -r dev_requirements.txt
 
-    - name: Run linting
+    - name: Check formatting
       run: |
         ruff check .
         ruff format --check .
+
+    - name: Check docstrings
+      run: interrogate -vv
+
+    - name: Check types
+      run: mypy tests
 
     - name: Add repo to PATH
       run: echo "$(git rev-parse --show-toplevel)" >> $GITHUB_PATH

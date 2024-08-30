@@ -1,3 +1,7 @@
+"""
+Test helpers.
+"""
+
 import subprocess
 
 
@@ -14,8 +18,8 @@ def get_success_stdout(cmd: list[str]) -> bytes:
     stdout, stderr = proc.communicate()
 
     if proc.returncode != 0:
-        print(f"stdout: {stdout}")
-        print(f"stderr: {stderr}")
+        print(f"stdout: {stdout.decode('utf8')}")
+        print(f"stderr: {stderr.decode('utf8')}")
 
     assert proc.returncode == 0
     assert stderr == b""
@@ -35,8 +39,8 @@ def get_failure_stderr(cmd: list[str]) -> bytes:
     stdout, stderr = proc.communicate()
 
     if proc.returncode == 0:
-        print(f"stdout: {stdout}")
-        print(f"stderr: {stderr}")
+        print(f"stdout: {stdout.decode('utf8')}")
+        print(f"stderr: {stderr.decode('utf8')}")
 
     assert proc.returncode != 0
     assert stdout == b""

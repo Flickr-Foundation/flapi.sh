@@ -1,0 +1,15 @@
+[project]
+name = "flapi"
+version = "1.0"
+
+[tool.pytest.ini_options]
+addopts = "-n 5"
+filterwarnings = ["error"]
+
+[tool.mypy]
+mypy_path = "src"
+strict = true
+
+[tool.interrogate]
+fail_under = 100
+omit-covered-files = true
