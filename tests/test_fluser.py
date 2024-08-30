@@ -17,7 +17,7 @@ from utils import get_failure_stderr, get_success_stdout
         "https://www.flickr.com/photos/flickrfoundation/53630778857/",
     ],
 )
-def test_fluser_handles_different_variants(flickr_api_key: None, argv: str) -> None:
+def test_fluser_handles_different_variants(argv: str) -> None:
     """
     Look up a user with ``fluser`` with different inputs.
     """

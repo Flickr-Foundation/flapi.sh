@@ -4,5 +4,4 @@ keyring
 mypy
 pygments
 pytest
-pytest-xdist
 ruff

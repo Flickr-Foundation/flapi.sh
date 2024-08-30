@@ -12,8 +12,6 @@ click==8.1.7
     # via interrogate
 colorama==0.4.6
     # via interrogate
-execnet==2.1.1
-    # via pytest-xdist
 flickr-url-parser==1.9.0
     # via -r dev_requirements.in
 h11==0.14.0
@@ -58,10 +56,6 @@ py==1.11.0
 pygments==2.18.0
     # via -r dev_requirements.in
 pytest==8.3.2
-    # via
-    #   -r dev_requirements.in
-    #   pytest-xdist
-pytest-xdist==3.6.1
     # via -r dev_requirements.in
 ruff==0.6.3
     # via -r dev_requirements.in

@@ -5,7 +5,7 @@ Tests for the ``flphoto`` script.
 from utils import get_failure_stderr, get_success_stdout
 
 
-def test_no_method_is_error(flickr_api_key: None) -> None:
+def test_no_method_is_error() -> None:
     """
     Calling ``flphoto`` without a photo ID is an error.
     """
@@ -13,7 +13,7 @@ def test_no_method_is_error(flickr_api_key: None) -> None:
     assert stderr.startswith(b"Usage: ")
 
 
-def test_too_many_arguments_is_error(flickr_api_key: None) -> None:
+def test_too_many_arguments_is_error() -> None:
     """
     Calling ``flphoto`` with more than one argument is an error.
     """
@@ -21,7 +21,7 @@ def test_too_many_arguments_is_error(flickr_api_key: None) -> None:
     assert stderr.startswith(b"Usage: ")
 
 
-def test_can_look_up_a_photo_id(flickr_api_key: None) -> None:
+def test_can_look_up_a_photo_id() -> None:
     """
     Call ``flphoto`` with a photo ID.
     """
@@ -30,7 +30,7 @@ def test_can_look_up_a_photo_id(flickr_api_key: None) -> None:
     assert b"https://www.flickr.com/photos/flickrfoundation/53630778857/" in stdout
 
 
-def test_can_look_up_a_photo_url(flickr_api_key: None) -> None:
+def test_can_look_up_a_photo_url() -> None:
     """
     Call ``flphoto`` with a photo URL.
     """
