@@ -21,7 +21,15 @@ def test_no_api_key_is_error():
     assert b"Unable to get Flickr API key from system keychain!" in stderr
 
 
-def test_can_call_an_api(flickr_api_key):
+def test_can_call_an_api_without_parameters(flickr_api_key):
+    stdout = get_success_stdout(
+        ["flapi", "flickr.commons.getInstitutions"]
+    )
+
+    assert b"http://flickr.com/photos/library_of_congress/" in stdout
+
+
+def test_can_call_an_api_with_parameters(flickr_api_key):
     stdout = get_success_stdout(
         ["flapi", "flickr.profile.getProfile", "user_id=197130754@N07"]
     )
