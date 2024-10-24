@@ -34,6 +34,18 @@ then
   exit 1
 fi
 
-curl --silent "https://api.flickr.com/services/rest/?api_key=${api_key}&method=${method}&${params}" \
-  | xmllint --format - \
-  | pygmentize -l xml
+XML_RESPONSE=$(
+  curl --silent --get "https://api.flickr.com/services/rest/" \
+    --data "api_key=${api_key}" \
+    --data "method=${method}" \
+    --data "${params}"
+)
+
+# Check if we're running in a Terminal -- only pretty print the response
+# with colours if so.
+if [ -t 1 ]
+then
+  echo "$XML_RESPONSE" | xmllint --format - | pygmentize -l xml
+else
+  echo "$XML_RESPONSE" | xmllint --format -
+fi
