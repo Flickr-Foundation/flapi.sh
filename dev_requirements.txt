@@ -45,7 +45,7 @@ jeepney==0.8.0
     # via
     #   keyring
     #   secretstorage
-keyring==25.5.0
+keyring==25.6.0
     # via -r dev_requirements.in
 more-itertools==10.4.0
     # via
