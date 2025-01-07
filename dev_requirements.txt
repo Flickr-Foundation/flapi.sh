@@ -63,7 +63,7 @@ py==1.11.0
     # via interrogate
 pycparser==2.22
     # via cffi
-pygments==2.19.0
+pygments==2.19.1
     # via -r dev_requirements.in
 pytest==8.3.4
     # via -r dev_requirements.in
