@@ -16,7 +16,7 @@ colorama==0.4.6
     # via interrogate
 cryptography==43.0.1
     # via secretstorage
-flickr-url-parser==1.10.0
+flickr-url-parser==1.11.0
     # via -r dev_requirements.in
 h11==0.14.0
     # via httpcore
