@@ -23,10 +23,10 @@ def test_fluser_handles_different_variants(argv: str) -> None:
     """
     stdout = get_success_stdout(["./fluser", argv])
     assert stdout == (
-        b"NSID:     197130754@N07\n"
-        b"username: Flickr Foundation\n"
-        b"realname: Flickr Foundation\n"
-        b"URL:      https://www.flickr.com/photos/flickrfoundation/\n"
+        "NSID:     197130754@N07\n"
+        "username: Flickr Foundation\n"
+        "realname: Flickr Foundation\n"
+        "URL:      https://www.flickr.com/photos/flickrfoundation/\n"
     )
 
 
@@ -35,7 +35,7 @@ def test_no_input_is_error() -> None:
     Calling ``fluser`` without any arguments is an error.
     """
     stderr = get_failure_stderr(cmd=["fluser"])
-    assert stderr.startswith(b"Usage: ")
+    assert stderr.startswith("Usage: ")
 
 
 def test_too_many_input_is_error() -> None:
@@ -45,7 +45,7 @@ def test_too_many_input_is_error() -> None:
     stderr = get_failure_stderr(
         cmd=["fluser", "https://www.flickr.com/photos/197130754@N07", "197130754@N07"]
     )
-    assert stderr.startswith(b"Usage: ")
+    assert stderr.startswith("Usage: ")
 
 
 def test_unrecognised_url_is_error() -> None:
@@ -53,4 +53,4 @@ def test_unrecognised_url_is_error() -> None:
     Calling ``fluser`` with a non-Flickr.com URL is an error.
     """
     stderr = get_failure_stderr(["fluser", "https://example.com"])
-    assert stderr == b"Unrecognised URL: https://example.com\n"
+    assert stderr == "Unrecognised URL: https://example.com\n"
