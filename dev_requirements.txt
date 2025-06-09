@@ -74,8 +74,10 @@ py==1.11.0
 pycparser==2.22
     # via cffi
 pygments==2.19.1
-    # via -r dev_requirements.in
-pytest==8.3.5
+    # via
+    #   -r dev_requirements.in
+    #   pytest
+pytest==8.4.0
     # via -r dev_requirements.in
 ruff==0.11.13
     # via -r dev_requirements.in
