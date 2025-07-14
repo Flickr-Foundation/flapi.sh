@@ -77,7 +77,7 @@ pygments==2.19.2
     # via
     #   -r dev_requirements.in
     #   pytest
-pytest==8.4.0
+pytest==8.4.1
     # via -r dev_requirements.in
 ruff==0.12.3
     # via -r dev_requirements.in
